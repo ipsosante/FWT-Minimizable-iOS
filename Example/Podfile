@@ -1,0 +1,10 @@
+target 'FWTMinimizable', :exclusive => true do
+  pod "FWTMinimizable", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "FWTMinimizable", :path => "../"
+
+  pod 'Specta', '~> 0.2.1'
+  pod 'Expecta'
+end
