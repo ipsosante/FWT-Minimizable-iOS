@@ -9,11 +9,8 @@
 #import "FWTMinimizableBaseViewController.h"
 #import "FWTModalInteractiveTransition.h"
 
-CGFloat const FWTMimizedViewHeight  = 48.f;
-
 @interface FWTMinimizableBaseViewController () <UIBarPositioningDelegate>
 
-@property (nonatomic, strong) UIViewController *minimizableController;
 @property (nonatomic, strong) FWTModalInteractiveTransition *transitioner;
 @property (nonatomic, strong) id modalCompletionBlock;
 

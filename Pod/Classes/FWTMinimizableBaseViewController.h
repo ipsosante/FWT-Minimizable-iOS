@@ -10,6 +10,8 @@
 
 @interface FWTMinimizableBaseViewController : UIViewController
 
+@property (nonatomic, strong) UIViewController *minimizableController;
+
 - (void)presentModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock;
 
 @end

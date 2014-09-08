@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
+#define FWTMimizedViewHeight 48.f
+
 typedef void (^FWTModalInteractiveTransitionMinimizeBlock)(UIViewController *viewController);
 typedef void (^FWTModalInteractiveTransitionDismissBlock)(UIViewController *viewController);
 
