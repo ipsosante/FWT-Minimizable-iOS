@@ -18,6 +18,15 @@ NSString *const FWTModalNavigationControllerIdentifier = @"FWTModalNavigationCon
 
 @implementation FWTViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.presentModalButton.layer.borderColor = self.view.tintColor.CGColor;
+    self.presentModalButton.layer.borderWidth = 1.f;
+    self.presentModalButton.layer.cornerRadius = 4.f;
+}
+
 - (IBAction)_presentModalAction:(id)sender
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
