@@ -56,16 +56,13 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
 {
-    // Location reference
     CGPoint location = [recognizer locationInView:self.modalController.view.window];
     location = CGPointApplyAffineTransform(location, CGAffineTransformInvert(recognizer.view.transform));
     
-    
-    // Velocity reference
     CGPoint velocity = [recognizer velocityInView:[self.modalController.view window]];
     velocity = CGPointApplyAffineTransform(velocity, CGAffineTransformInvert(recognizer.view.transform));
     
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
+    if (recognizer.state == UIGestureRecognizerStateBegan){
         self.isInteractive = YES;
         self.panLocationStart = location.y;
         
@@ -80,7 +77,7 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
         
         CGFloat velocityForSelectedDirection = velocity.y;
         
-        if (velocityForSelectedDirection > 100) {
+        if (velocityForSelectedDirection > 100){
             [self finishInteractiveTransition];
         }
         else{
@@ -107,19 +104,10 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     if (self.isDismiss == false){
-        CGRect barFrame = toViewController.view.frame;
-        
-        barFrame.origin.y = -20.f;
-        toViewController.view.frame = barFrame;
-    }
-    
-    if (self.isDismiss == false){
         if ([toViewController isKindOfClass:[UINavigationController class]]) {
-            UINavigationController* navigationController = (UINavigationController*) toViewController;
-            UINavigationBar* bar = navigationController.navigationBar;
-            CGRect frame = bar.frame;
-            bar.frame = CGRectMake(frame.origin.x, frame.origin.y + FWTModalInteractiveTransitionModalTopMargin,
-                                   frame.size.width, frame.size.height + FWTModalInteractiveTransitionModalTopMargin);
+            CGRect barFrame = toViewController.view.frame;
+            barFrame.origin.y = -FWTModalInteractiveTransitionModalTopMargin;
+            toViewController.view.frame = barFrame;
         }
         
         [[transitionContext containerView] addSubview:toViewController.view];
@@ -151,7 +139,6 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
                              
                          } completion:^(BOOL finished) {
                              [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-                             
                          }];
     }
     else{
@@ -174,7 +161,7 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
         self.dismissBlock(toViewController);
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
-                              delay:0
+                              delay:0.f
              usingSpringWithDamping:0.7f
               initialSpringVelocity:0.8f
                             options:UIViewAnimationOptionCurveEaseOut
@@ -197,7 +184,7 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
-    if (![self isIOS8]) {
+    if ([self isIOS8] == false) {
         toViewController.view.layer.transform = CATransform3DScale(toViewController.view.layer.transform, self.behindViewScale, self.behindViewScale, 1);
     }
     
@@ -257,9 +244,9 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
     endRect = CGRectMake(transformedPoint.x, transformedPoint.y, endRect.size.width, endRect.size.height);
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
-                          delay:0
-         usingSpringWithDamping:5
-          initialSpringVelocity:5
+                          delay:0.f
+         usingSpringWithDamping:0.7f
+          initialSpringVelocity:0.8f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          CGFloat scaleBack = (1 / self.behindViewScale);
@@ -279,10 +266,10 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
-    [UIView animateWithDuration:0.4
-                          delay:0
-         usingSpringWithDamping:5
-          initialSpringVelocity:5
+    [UIView animateWithDuration:0.4f
+                          delay:0.f
+         usingSpringWithDamping:0.7f
+          initialSpringVelocity:0.8f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          toViewController.view.layer.transform = self.tridimensionalTransform;

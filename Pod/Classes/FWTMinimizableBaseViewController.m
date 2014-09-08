@@ -17,7 +17,7 @@ CGFloat const FWTMimizedViewHeight  = 48.f;
 @property (nonatomic, strong) FWTModalInteractiveTransition *transitioner;
 @property (nonatomic, strong) id modalCompletionBlock;
 
-@property (nonatomic, strong) UIButton *minimizedView;
+@property (nonatomic, strong) UIView *minimizedView;
 
 @end
 
@@ -38,11 +38,7 @@ CGFloat const FWTMimizedViewHeight  = 48.f;
 
 - (void)presentModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock
 {
-    [((UINavigationController*)controller).viewControllers.lastObject setModalPresentationCapturesStatusBarAppearance:NO];
-    
-    [((UINavigationController*)controller) setAutomaticallyAdjustsScrollViewInsets:YES];
-    
-    [self _restoreController];
+    [controller.view setBackgroundColor:[UIColor whiteColor]];
     
     self.modalCompletionBlock = completionBlock;
     self.minimizableController = controller;
@@ -66,10 +62,12 @@ CGFloat const FWTMimizedViewHeight  = 48.f;
                      animations:^{
                          CGRect finalFrame = self.view.superview.frame;
                          finalFrame.size.height = CGRectGetHeight(finalFrame) - FWTMimizedViewHeight;
-                         self.minimizedView.frame = CGRectMake(0, finalFrame.size.height + 1.f, CGRectGetWidth(self.minimizedView.frame), FWTMimizedViewHeight);
+                         self.minimizedView.frame = CGRectMake(0, finalFrame.size.height, CGRectGetWidth(self.minimizedView.frame), FWTMimizedViewHeight);
                          self.view.frame = finalFrame;
                      } completion:^(BOOL finished) {
-                         
+                         CGRect finalFrame = self.view.superview.frame;
+                         finalFrame.size.height = CGRectGetHeight(finalFrame) - FWTMimizedViewHeight;
+                         self.view.frame = finalFrame;
                      }];
 }
 
@@ -95,7 +93,7 @@ CGFloat const FWTMimizedViewHeight  = 48.f;
     [self presentViewController:self.minimizableController animated:YES completion:^{
         typeof(self) refSelf = weakSelf;
         
-        [refSelf _restoreController];
+        [self _restoreController];
         
         if (refSelf.modalCompletionBlock != nil){
             ((void (^)(void))refSelf.modalCompletionBlock)();
@@ -148,17 +146,27 @@ CGFloat const FWTMimizedViewHeight  = 48.f;
     return block;
 }
 
-- (UIButton*)minimizedView
+- (UIView*)minimizedView
 {
     if (self->_minimizedView == nil){
-        self->_minimizedView = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.superview.frame), CGRectGetWidth(self.view.frame), FWTMimizedViewHeight)];
+        self->_minimizedView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame), CGRectGetWidth(self.view.frame), FWTMimizedViewHeight)];
         self->_minimizedView.backgroundColor = [UIColor whiteColor];
-        [self->_minimizedView addTarget:self action:@selector(_maximizeController) forControlEvents:UIControlEventTouchUpInside];
-        [self->_minimizedView setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), FWTMimizedViewHeight)];
+        button.backgroundColor = [UIColor whiteColor];
+        [button addTarget:self action:@selector(_maximizeController) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitleColor:self.view.tintColor forState:UIControlStateNormal];
         
         if ([self.minimizableController respondsToSelector:@selector(title)]){
-            [self->_minimizedView setTitle:self.minimizableController.title forState:UIControlStateNormal];
+            [button setTitle:self.minimizableController.title forState:UIControlStateNormal];
         }
+        
+        [self->_minimizedView addSubview:button];
+        
+        UIView *topSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self->_minimizedView.frame), 1.f)];
+        topSeparator.backgroundColor = [UIColor lightGrayColor];
+        
+        [self->_minimizedView addSubview:topSeparator];
     }
     
     if (self->_minimizedView.superview == nil){
