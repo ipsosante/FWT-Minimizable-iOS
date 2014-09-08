@@ -8,22 +8,23 @@
 
 #import "FWTViewController.h"
 
+NSString *const FWTModalNavigationControllerIdentifier = @"FWTModalNavigationControllerIdentifier";
+
 @interface FWTViewController ()
+
+@property (strong, nonatomic) IBOutlet UIButton *presentModalButton;
 
 @end
 
 @implementation FWTViewController
 
-- (void)viewDidLoad
+- (IBAction)_presentModalAction:(id)sender
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    
+    UINavigationController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:FWTModalNavigationControllerIdentifier];
+    
+    [self presentModalController:controller withCompletionBlock:nil];
 }
 
 @end

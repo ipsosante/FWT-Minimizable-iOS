@@ -10,40 +10,33 @@
 
 @interface FWTWebViewController ()
 
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation FWTWebViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.title = @"About Future Workshops";
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewDidAppear:animated];
+    
+    if (self.webView.request == nil){
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://www.futureworkshops.com"]];
+        [self.webView loadRequest:request];
+    }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+#pragma mark - Private methods
+- (IBAction)_dismiss:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
 
 @end

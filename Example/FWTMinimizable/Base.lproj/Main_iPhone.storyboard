@@ -1,25 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="XLE-q9-5JI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Navigation Controller-->
+        <scene sceneID="Mdf-Ng-AfF">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="FWTViewController" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="XLE-q9-5JI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="whj-sg-qde">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8nd-bv-5sP" kind="relationship" relationship="rootViewController" id="I8a-qg-IuR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lsw-Nx-5VG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7" y="250"/>
+        </scene>
+        <!--View Controller - FWTMinimizable-->
+        <scene sceneID="zaE-JC-g5V">
+            <objects>
+                <viewController id="8nd-bv-5sP" customClass="FWTViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="pAb-LV-d90"/>
+                        <viewControllerLayoutGuide type="bottom" id="ify-gY-HVr"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="23y-JD-Iim">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqc-Mz-CUo">
+                                <rect key="frame" x="82" y="261" width="157" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Present modal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="_presentModalAction:" destination="8nd-bv-5sP" eventType="touchUpInside" id="jTK-Ll-KPO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="FWTMinimizable" id="arM-KU-9h8"/>
+                    <connections>
+                        <outlet property="presentModalButton" destination="wqc-Mz-CUo" id="GFK-Qf-PWd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RTw-1U-W5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="463" y="250"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="P4S-8t-Wgs">
+            <objects>
+                <navigationController storyboardIdentifier="FWTModalNavigationControllerIdentifier" definesPresentationContext="YES" id="SyS-y6-Hpp" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iw1-8G-khv">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cr9-9I-8Th" kind="relationship" relationship="rootViewController" id="VOF-zq-rFb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yCL-g4-ufi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1130" y="250"/>
+        </scene>
+        <!--Web View Controller - About Future Workshops-->
+        <scene sceneID="73A-9M-vgO">
+            <objects>
+                <viewController id="cr9-9I-8Th" customClass="FWTWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W7V-s9-3KI"/>
+                        <viewControllerLayoutGuide type="bottom" id="DYZ-8B-9aR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tjs-ly-sF8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wi4-0k-l6D">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="About Future Workshops" id="Sas-gg-He5">
+                        <barButtonItem key="rightBarButtonItem" title="Close" style="done" id="X89-Yc-0Jz">
+                            <connections>
+                                <action selector="_dismiss:" destination="cr9-9I-8Th" id="w29-T9-Vci"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="Wi4-0k-l6D" id="yJk-ao-JQ2"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ca8-3E-82P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1728" y="250"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

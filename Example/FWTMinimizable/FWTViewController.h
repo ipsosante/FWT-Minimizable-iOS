@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FWTMinimizableBaseViewController.h"
 
-@interface FWTViewController : UIViewController
+@interface FWTViewController : FWTMinimizableBaseViewController
 
 @end
