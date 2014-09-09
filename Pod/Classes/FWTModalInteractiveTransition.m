@@ -38,6 +38,9 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
     self = [super init];
     
     if (self != nil){
+        NSNumber *flag = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIViewControllerBasedStatusBarAppearance"];
+        NSAssert(flag.boolValue == NO, @"Please set the property UIViewControllerBasedStatusBarAppearance to \"NO\" in your project's plist file");
+        
         self->_modalController = modalViewController;
         self->_bounces = YES;
         self->_behindViewScale = 0.90f;
