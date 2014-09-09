@@ -29,7 +29,7 @@
 {
     [super viewWillAppear:animated];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -48,7 +48,7 @@
 {
     self.minimizableController = controller;
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [self setNeedsStatusBarAppearanceUpdate];
     
     [UIView animateWithDuration:0.6f
@@ -79,7 +79,7 @@
 
 - (void)_presentControllerWithCustomAnimation
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [self setNeedsStatusBarAppearanceUpdate];
     
     self.minimizableController.modalPresentationStyle = UIModalPresentationCustom;
@@ -136,7 +136,7 @@
     FWTModalInteractiveTransitionDismissBlock block = ^(UIViewController *viewController){
         typeof(self) refSelf = weakSelf;
         
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
         [refSelf setNeedsStatusBarAppearanceUpdate];
     };
     
