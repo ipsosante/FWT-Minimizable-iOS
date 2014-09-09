@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "FWTMinimizable"
-  s.version          = "0.0.2.beta1"
+  s.version          = "0.0.2.beta2"
   s.summary          = "A cool transition which allows you to retain a view controller minimized at the bottom of the screen."
   s.description      = <<-DESC
                        A cool transition which allows you to retain a view controller minimized at the bottom of the screen.
