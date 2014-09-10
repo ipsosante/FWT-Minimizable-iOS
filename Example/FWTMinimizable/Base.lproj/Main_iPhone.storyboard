@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Minimizable Navigation Controller-->
         <scene sceneID="Mdf-Ng-AfF">
             <objects>
-                <navigationController definesPresentationContext="YES" id="XLE-q9-5JI" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="XLE-q9-5JI" customClass="FWTMinimizableNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="whj-sg-qde">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -45,6 +45,16 @@
                                 <rect key="frame" x="53" y="117" width="215" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNd-9G-ojz">
+                                <rect key="frame" x="137" y="383" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vho-8L-9eE" kind="push" id="8K4-AF-dW5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -56,6 +66,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTw-1U-W5z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="463" y="250"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fcz-lI-cH2">
+            <objects>
+                <viewController id="vho-8L-9eE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cS0-qp-rQT"/>
+                        <viewControllerLayoutGuide type="bottom" id="W0U-6f-GLU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hZx-I7-CxZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aXh-Jh-dyj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kpt-Ra-SlM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1004" y="-527"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="P4S-8t-Wgs">

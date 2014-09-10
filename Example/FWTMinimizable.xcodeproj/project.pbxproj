@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		078956DE19BF98F20001137C /* FWTMinimizableNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078956DD19BF98F20001137C /* FWTMinimizableNavigationController.m */; };
 		07EA524119BDCC8A0040C940 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07EA524019BDCC8A0040C940 /* QuartzCore.framework */; };
 		07EA524619BDCD1F0040C940 /* FWTModalInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EA524519BDCD1F0040C940 /* FWTModalInteractiveTransition.m */; };
-		07EA524919BDCD440040C940 /* FWTMinimizableBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EA524819BDCD440040C940 /* FWTMinimizableBaseViewController.m */; };
 		07EA524C19BDDD4C0040C940 /* FWTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EA524B19BDDD4C0040C940 /* FWTWebViewController.m */; };
-		07EA525119BE0A030040C940 /* FWTMinimizableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EA525019BE0A030040C940 /* FWTMinimizableTableViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -41,15 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		078956DC19BF98F20001137C /* FWTMinimizableNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FWTMinimizableNavigationController.h; path = ../Pod/Classes/FWTMinimizableNavigationController.h; sourceTree = "<group>"; };
+		078956DD19BF98F20001137C /* FWTMinimizableNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FWTMinimizableNavigationController.m; path = ../Pod/Classes/FWTMinimizableNavigationController.m; sourceTree = "<group>"; };
 		07EA524019BDCC8A0040C940 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		07EA524419BDCD1F0040C940 /* FWTModalInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FWTModalInteractiveTransition.h; path = ../Pod/Classes/FWTModalInteractiveTransition.h; sourceTree = "<group>"; };
 		07EA524519BDCD1F0040C940 /* FWTModalInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FWTModalInteractiveTransition.m; path = ../Pod/Classes/FWTModalInteractiveTransition.m; sourceTree = "<group>"; };
-		07EA524719BDCD440040C940 /* FWTMinimizableBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FWTMinimizableBaseViewController.h; path = ../Pod/Classes/FWTMinimizableBaseViewController.h; sourceTree = "<group>"; };
-		07EA524819BDCD440040C940 /* FWTMinimizableBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FWTMinimizableBaseViewController.m; path = ../Pod/Classes/FWTMinimizableBaseViewController.m; sourceTree = "<group>"; };
 		07EA524A19BDDD4C0040C940 /* FWTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWTWebViewController.h; sourceTree = "<group>"; };
 		07EA524B19BDDD4C0040C940 /* FWTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWTWebViewController.m; sourceTree = "<group>"; };
-		07EA524F19BE0A030040C940 /* FWTMinimizableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FWTMinimizableTableViewController.h; path = ../Pod/Classes/FWTMinimizableTableViewController.h; sourceTree = "<group>"; };
-		07EA525019BE0A030040C940 /* FWTMinimizableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FWTMinimizableTableViewController.m; path = ../Pod/Classes/FWTMinimizableTableViewController.m; sourceTree = "<group>"; };
 		250638F867B54A66888AB5FF /* FWTMinimizable.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FWTMinimizable.podspec; path = ../FWTMinimizable.podspec; sourceTree = "<group>"; };
 		3DDB84147BF44400A51C469A /* libPods-FWTMinimizable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FWTMinimizable.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2725DDA1964F02BF1CADC3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -119,10 +116,8 @@
 			children = (
 				07EA524419BDCD1F0040C940 /* FWTModalInteractiveTransition.h */,
 				07EA524519BDCD1F0040C940 /* FWTModalInteractiveTransition.m */,
-				07EA524719BDCD440040C940 /* FWTMinimizableBaseViewController.h */,
-				07EA524819BDCD440040C940 /* FWTMinimizableBaseViewController.m */,
-				07EA524F19BE0A030040C940 /* FWTMinimizableTableViewController.h */,
-				07EA525019BE0A030040C940 /* FWTMinimizableTableViewController.m */,
+				078956DC19BF98F20001137C /* FWTMinimizableNavigationController.h */,
+				078956DD19BF98F20001137C /* FWTMinimizableNavigationController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -394,10 +389,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* FWTAppDelegate.m in Sources */,
-				07EA524919BDCD440040C940 /* FWTMinimizableBaseViewController.m in Sources */,
 				07EA524619BDCD1F0040C940 /* FWTModalInteractiveTransition.m in Sources */,
 				07EA524C19BDDD4C0040C940 /* FWTWebViewController.m in Sources */,
-				07EA525119BE0A030040C940 /* FWTMinimizableTableViewController.m in Sources */,
+				078956DE19BF98F20001137C /* FWTMinimizableNavigationController.m in Sources */,
 				6003F5A7195388D20070C39A /* FWTViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

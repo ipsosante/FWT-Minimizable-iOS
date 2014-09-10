@@ -1,14 +1,14 @@
 //
-//  FWTMinimizableViewController.h
-//  FWT-Retained-Modal-Transition-iOS
+//  FWTMinimizableNavigationController.h
+//  FWTMinimizable
 //
-//  Created by Carlos Vidal on 30/08/2014.
-//
+//  Created by Carlos Vidal on 09/09/2014.
+//  Copyright (c) 2014 Carlos. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface FWTMinimizableBaseViewController : UIViewController
+@interface FWTMinimizableNavigationController : UINavigationController
 
 @property (nonatomic, strong) UIViewController *minimizableController;
 
