@@ -7,43 +7,165 @@
 //
 
 #import "FWTMinimizableNavigationController.h"
+#import "FWTModalInteractiveTransition.h"
 
 @interface FWTMinimizableNavigationController ()
+
+@property (nonatomic, strong) FWTModalInteractiveTransition *transitioner;
+@property (nonatomic, strong) id modalCompletionBlock;
+@property (nonatomic, strong) UIView *minimizedView;
 
 @end
 
 @implementation FWTMinimizableNavigationController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+- (void)presentModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [controller.view setBackgroundColor:[UIColor whiteColor]];
+    
+    self.modalCompletionBlock = completionBlock;
+    self.minimizableController = controller;
+    
+    [self _presentControllerWithCustomAnimation];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+#pragma mark - Private methods
+- (void)_minimizeController:(UIViewController*)controller
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    self.minimizableController = controller;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    [UIView animateWithDuration:0.6f
+                          delay:0.0f
+         usingSpringWithDamping:0.7f
+          initialSpringVelocity:0.8f
+                        options:0
+                     animations:^{
+                         CGRect finalFrame = self.view.superview.bounds;
+                         finalFrame.size.height = finalFrame.size.height - FWTMimizedViewHeight;
+                         self.minimizedView.frame = CGRectMake(0, CGRectGetHeight(finalFrame), CGRectGetWidth(finalFrame), FWTMimizedViewHeight);
+                     } completion:^(BOOL finished) {
+                         CGRect finalFrame = self.view.superview.bounds;
+                         finalFrame.size.height = finalFrame.size.height - FWTMimizedViewHeight + 1;
+                         finalFrame.size.width += 1;
+                         self.view.frame = finalFrame;
+                     }];
 }
-*/
+
+- (void)_maximizeController
+{
+    if (self->_minimizedView == nil){
+        return;
+    }
+    
+    [self _presentControllerWithCustomAnimation];
+}
+
+- (void)_presentControllerWithCustomAnimation
+{
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    self.minimizableController.modalPresentationStyle = UIModalPresentationCustom;
+    self.transitioner = [[FWTModalInteractiveTransition alloc] initWithModalViewController:self.minimizableController minimizeBlock:[self _minimizeBlock] dismissBlock:[self _dismissBlock]];
+    self.minimizableController.transitioningDelegate = self.transitioner;
+    
+    [self _restoreController];
+    
+    __weak typeof(self) weakSelf = self;
+    [self presentViewController:self.minimizableController animated:YES completion:^{
+        typeof(self) refSelf = weakSelf;
+        
+        if (refSelf.modalCompletionBlock != nil){
+            ((void (^)(void))refSelf.modalCompletionBlock)();
+        }
+    }];
+}
+
+- (void)_restoreController
+{
+    if (self->_minimizedView == nil){
+        return;
+    }
+    
+    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGRect finalFrame = self.view.bounds;
+        finalFrame.size.height = CGRectGetHeight(self.view.superview.frame);
+        
+        self.minimizedView.frame = CGRectMake(0, finalFrame.size.height, CGRectGetWidth(self.minimizedView.frame), FWTMimizedViewHeight);
+        
+        UIViewController *controller = self.viewControllers.lastObject;
+        controller.view.frame = finalFrame;
+    } completion:^(BOOL finished) {
+        [self.minimizedView removeFromSuperview];
+        self->_minimizedView = nil;
+    }];
+}
+
+#pragma mark - Lazy loading
+- (FWTModalInteractiveTransitionMinimizeBlock)_minimizeBlock
+{
+    __weak typeof(self) weakSelf = self;
+    
+    FWTModalInteractiveTransitionMinimizeBlock block = ^(UIViewController *viewController){
+        typeof(self) refSelf = weakSelf;
+        
+        [refSelf _minimizeController:viewController];
+    };
+    
+    return block;
+}
+
+- (FWTModalInteractiveTransitionDismissBlock)_dismissBlock
+{
+    __weak typeof(self) weakSelf = self;
+    
+    FWTModalInteractiveTransitionDismissBlock block = ^(UIViewController *viewController){
+        typeof(self) refSelf = weakSelf;
+        
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+        [refSelf setNeedsStatusBarAppearanceUpdate];
+    };
+    
+    return block;
+}
+
+- (UIView*)minimizedView
+{
+    if (self->_minimizedView == nil){
+        self->_minimizedView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame), CGRectGetWidth(self.view.frame), FWTMimizedViewHeight)];
+        self->_minimizedView.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), FWTMimizedViewHeight)];
+        button.backgroundColor = [UIColor whiteColor];
+        [button addTarget:self action:@selector(_maximizeController) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitleColor:self.view.tintColor forState:UIControlStateNormal];
+        
+        if ([self.minimizableController respondsToSelector:@selector(title)]){
+            [button setTitle:self.minimizableController.title forState:UIControlStateNormal];
+        }
+        
+        [self->_minimizedView addSubview:button];
+        
+        UIView *topSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self->_minimizedView.frame), 1.f)];
+        topSeparator.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        topSeparator.backgroundColor = [UIColor lightGrayColor];
+        
+        [self->_minimizedView addSubview:topSeparator];
+    }
+    
+    if (self->_minimizedView.superview == nil){
+        [self.view.superview addSubview:self->_minimizedView];
+    }
+    
+    return self->_minimizedView;
+}
 
 @end

@@ -231,8 +231,6 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
 
 - (void)finishInteractiveTransition
 {
-    
-    self.minimizeBlock(self.modalController);
     id<UIViewControllerContextTransitioning> transitionContext = self.transitionContext;
     
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
@@ -246,8 +244,9 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
     CGPoint transformedPoint = CGPointApplyAffineTransform(endRect.origin, fromViewController.view.transform);
     endRect = CGRectMake(transformedPoint.x, transformedPoint.y, endRect.size.width, endRect.size.height);
     
+    
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
-                          delay:0.f
+                          delay:0.0f
          usingSpringWithDamping:0.7f
           initialSpringVelocity:0.8f
                         options:UIViewAnimationOptionCurveEaseOut
@@ -258,6 +257,7 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
                          fromViewController.view.frame = endRect;
                      } completion:^(BOOL finished) {
                          [transitionContext completeTransition:YES];
+                         self.minimizeBlock(self.modalController);
                          self.modalController = nil;
                      }];
 }
@@ -308,8 +308,7 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
 
 - (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id <UIViewControllerAnimatedTransitioning>)animator
 {
-    // Return nil if we are not interactive
-    if (self.isInteractive == true) {
+    if (self.isInteractive == true){
         self.isDismiss = YES;
         return self;
     }

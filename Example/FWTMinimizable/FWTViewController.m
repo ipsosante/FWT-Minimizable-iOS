@@ -7,6 +7,7 @@
 //
 
 #import "FWTViewController.h"
+#import "FWTMinimizableNavigationController.h"
 
 NSString *const FWTModalNavigationControllerIdentifier = @"FWTModalNavigationControllerIdentifier";
 
@@ -33,7 +34,8 @@ NSString *const FWTModalNavigationControllerIdentifier = @"FWTModalNavigationCon
     
     UINavigationController *controller = [mainStoryboard instantiateViewControllerWithIdentifier:FWTModalNavigationControllerIdentifier];
     
-    [self presentModalController:controller withCompletionBlock:nil];
+    FWTMinimizableNavigationController *navigationController = (FWTMinimizableNavigationController*)self.navigationController;
+    [navigationController presentModalController:controller withCompletionBlock:nil];
 }
 
 @end
