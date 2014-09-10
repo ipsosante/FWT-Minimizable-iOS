@@ -52,10 +52,12 @@
                          finalFrame.size.height = finalFrame.size.height - FWTMimizedViewHeight;
                          self.minimizedView.frame = CGRectMake(0, CGRectGetHeight(finalFrame), CGRectGetWidth(finalFrame), FWTMimizedViewHeight);
                      } completion:^(BOOL finished) {
-                         CGRect finalFrame = self.view.superview.bounds;
-                         finalFrame.size.height = finalFrame.size.height - FWTMimizedViewHeight + 1;
-                         finalFrame.size.width += 1;
-                         self.view.frame = finalFrame;
+                         [UIView animateWithDuration:0.1f animations:^{
+                             CGRect finalFrame = self.view.superview.bounds;
+                             finalFrame.size.height = finalFrame.size.height - FWTMimizedViewHeight + 1;
+                             finalFrame.size.width += 1;
+                             self.view.frame = finalFrame;
+                         }];
                      }];
 }
 
