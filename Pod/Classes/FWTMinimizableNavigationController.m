@@ -103,8 +103,14 @@
         
         self.minimizedView.frame = CGRectMake(0, finalFrame.size.height, CGRectGetWidth(self.minimizedView.frame), FWTMimizedViewHeight);
         
-        UIViewController *controller = self.viewControllers.lastObject;
-        controller.view.frame = finalFrame;
+        
+        if ([FWTModalInteractiveTransition isIOS8] == true){
+            self.view.frame = self.view.superview.bounds;
+        }
+        else {
+            UIViewController *controller = self.viewControllers.lastObject;
+            controller.view.frame = finalFrame;
+        }
     } completion:^(BOOL finished) {
         [self.minimizedView removeFromSuperview];
         self->_minimizedView = nil;

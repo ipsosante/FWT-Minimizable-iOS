@@ -25,5 +25,6 @@ UIViewControllerTransitioningDelegate,
 UIGestureRecognizerDelegate>
 
 - (id)initWithModalViewController:(UIViewController*)modalViewController minimizeBlock:(FWTModalInteractiveTransitionMinimizeBlock)minimizeBlock dismissBlock:(FWTModalInteractiveTransitionDismissBlock)dismissBlock;
++ (BOOL)isIOS8;
 
 @end

@@ -114,7 +114,7 @@ CGFloat const FWTModalInteractiveTransitionModalFixedNavBarHeight   = 43.f;
         if ([toViewController isKindOfClass:[UINavigationController class]]) {
             UINavigationController *toNavController = (UINavigationController*)toViewController;
             
-            if ([self isIOS8] == true) {
+            if ([FWTModalInteractiveTransition isIOS8] == true) {
                 toNavController.navigationBar.frame = CGRectMake(0.f, 0.f, CGRectGetWidth(toViewController.view.frame), FWTModalInteractiveTransitionModalFixedNavBarHeight);
             }
             else {
@@ -154,7 +154,7 @@ CGFloat const FWTModalInteractiveTransitionModalFixedNavBarHeight   = 43.f;
     else{
         [[transitionContext containerView] bringSubviewToFront:fromViewController.view];
         
-        if ([self isIOS8] == false) {
+        if ([FWTModalInteractiveTransition isIOS8] == false) {
             toViewController.view.layer.transform = CATransform3DScale(toViewController.view.layer.transform, self.behindViewScale, self.behindViewScale, 1);
         }
         
@@ -194,7 +194,7 @@ CGFloat const FWTModalInteractiveTransitionModalFixedNavBarHeight   = 43.f;
     UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
-    if ([self isIOS8] == false) {
+    if ([FWTModalInteractiveTransition isIOS8] == false) {
         toViewController.view.layer.transform = CATransform3DScale(toViewController.view.layer.transform, self.behindViewScale, self.behindViewScale, 1);
     }
     
@@ -323,8 +323,8 @@ CGFloat const FWTModalInteractiveTransitionModalFixedNavBarHeight   = 43.f;
     return nil;
 }
 
-#pragma mark - Utils
-- (BOOL)isIOS8
+#pragma mark - Public class methods
++ (BOOL)isIOS8
 {
     NSComparisonResult order = [[UIDevice currentDevice].systemVersion compare: @"8.0" options: NSNumericSearch];
     
