@@ -8,7 +8,8 @@
 
 #import "FWTModalInteractiveTransition.h"
 
-CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
+CGFloat const FWTModalInteractiveTransitionModalTopMargin           = 20.f;
+CGFloat const FWTModalInteractiveTransitionModalFixedNavBarHeight   = 43.f;
 
 @interface FWTModalInteractiveTransition()
 
@@ -107,15 +108,21 @@ CGFloat const FWTModalInteractiveTransitionModalTopMargin = 20.f;
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
     if (self.isDismiss == false){
-        if ([toViewController isKindOfClass:[UINavigationController class]]) {
-            CGRect barFrame = toViewController.view.frame;
-            barFrame.origin.y = -FWTModalInteractiveTransitionModalTopMargin;
-            toViewController.view.frame = barFrame;
-        }
         
         [[transitionContext containerView] addSubview:toViewController.view];
         
-        toViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        if ([toViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *toNavController = (UINavigationController*)toViewController;
+            
+            if ([self isIOS8] == true) {
+                toNavController.navigationBar.frame = CGRectMake(0.f, 0.f, CGRectGetWidth(toViewController.view.frame), FWTModalInteractiveTransitionModalFixedNavBarHeight);
+            }
+            else {
+                CGRect barFrame = toViewController.view.frame;
+                barFrame.origin.y = -FWTModalInteractiveTransitionModalTopMargin;
+                toNavController.view.frame = barFrame;
+            }
+        }
         
         CGRect startRect = CGRectMake(0,
                                       CGRectGetHeight(toViewController.view.frame),
