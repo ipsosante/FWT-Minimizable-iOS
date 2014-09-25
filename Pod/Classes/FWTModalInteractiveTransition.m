@@ -18,7 +18,7 @@ CGFloat const FWTModalInteractiveTransitionModalFixedNavBarHeight   = 43.f;
 
 @property (nonatomic, strong) FWTFailOnEdgeGestureRecognizer *gesture;
 @property (nonatomic, assign) BOOL isInteractive;
-@property (nonatomic, assign)CGFloat panLocationStart;
+@property (nonatomic, assign) CGFloat panLocationStart;
 
 @property (nonatomic, assign) CATransform3D tridimensionalTransform;
 @property (nonatomic, assign) BOOL isDismiss;
@@ -34,7 +34,7 @@ CGFloat const FWTModalInteractiveTransitionModalFixedNavBarHeight   = 43.f;
 
 @implementation FWTModalInteractiveTransition
 
-- (id)initWithModalViewController:(UIViewController*)modalViewController minimizeBlock:(FWTModalInteractiveTransitionMinimizeBlock)minimizeBlock dismissBlock:(FWTModalInteractiveTransitionDismissBlock)dismissBlock
+- (id)initWithModalViewController:(UIViewController*)modalViewController minimizeBlock:(FWTModalInteractiveTransitionMinimizeBlock)minimizeBlock dismissBlock:(FWTModalInteractiveTransitionDismissBlock)dismissBlock interactive:(BOOL)interactive
 {
     self = [super init];
     
@@ -49,9 +49,11 @@ CGFloat const FWTModalInteractiveTransitionModalFixedNavBarHeight   = 43.f;
         self->_minimizeBlock = minimizeBlock;
         self->_dismissBlock = dismissBlock;
         
-        self->_gesture = [[FWTFailOnEdgeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        self->_gesture.delegate = self;
-        [modalViewController.view addGestureRecognizer:self->_gesture];
+        if (interactive == YES) {
+            self->_gesture = [[FWTFailOnEdgeGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+            self->_gesture.delegate = self;
+            [modalViewController.view addGestureRecognizer:self->_gesture];
+        }
     }
     
     return self;

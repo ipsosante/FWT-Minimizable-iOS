@@ -24,17 +24,27 @@
     [super viewDidLoad];
 }
 
+- (void)presentInteractiveModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock
+{
+    [self _presentModalController:controller withCompletionBlock:completionBlock interactive:YES];
+}
+
 - (void)presentModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock
+{
+    [self _presentModalController:controller withCompletionBlock:completionBlock interactive:NO];
+}
+
+#pragma mark - Private methods
+- (void)_presentModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock interactive:(BOOL)isInteractive
 {
     [controller.view setBackgroundColor:[UIColor whiteColor]];
     
     self.modalCompletionBlock = completionBlock;
     self.minimizableController = controller;
     
-    [self _presentControllerWithCustomAnimation];
+    [self _presentControllerWithInteractionEnabled:isInteractive];
 }
 
-#pragma mark - Private methods
 - (void)_minimizeController:(UIViewController*)controller
 {
     self.minimizableController = controller;
@@ -67,16 +77,16 @@
         return;
     }
     
-    [self _presentControllerWithCustomAnimation];
+    [self _presentControllerWithInteractionEnabled:YES];
 }
 
-- (void)_presentControllerWithCustomAnimation
+- (void)_presentControllerWithInteractionEnabled:(BOOL)interactionEnabled
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [self setNeedsStatusBarAppearanceUpdate];
     
     self.minimizableController.modalPresentationStyle = UIModalPresentationCustom;
-    self.transitioner = [[FWTModalInteractiveTransition alloc] initWithModalViewController:self.minimizableController minimizeBlock:[self _minimizeBlock] dismissBlock:[self _dismissBlock]];
+    self.transitioner = [[FWTModalInteractiveTransition alloc] initWithModalViewController:self.minimizableController minimizeBlock:[self _minimizeBlock] dismissBlock:[self _dismissBlock] interactive:interactionEnabled];
     self.minimizableController.transitioningDelegate = self.transitioner;
     
     [self _restoreController];

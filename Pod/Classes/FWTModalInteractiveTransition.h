@@ -24,7 +24,7 @@ typedef void (^FWTModalInteractiveTransitionDismissBlock)(UIViewController *view
 UIViewControllerTransitioningDelegate,
 UIGestureRecognizerDelegate>
 
-- (id)initWithModalViewController:(UIViewController*)modalViewController minimizeBlock:(FWTModalInteractiveTransitionMinimizeBlock)minimizeBlock dismissBlock:(FWTModalInteractiveTransitionDismissBlock)dismissBlock;
+- (id)initWithModalViewController:(UIViewController*)modalViewController minimizeBlock:(FWTModalInteractiveTransitionMinimizeBlock)minimizeBlock dismissBlock:(FWTModalInteractiveTransitionDismissBlock)dismissBlock interactive:(BOOL)interactive;
 + (BOOL)isIOS8;
 
 @end

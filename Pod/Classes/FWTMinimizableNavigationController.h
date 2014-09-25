@@ -13,5 +13,6 @@
 @property (nonatomic, strong) UIViewController *minimizableController;
 
 - (void)presentModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock;
+- (void)presentInteractiveModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock;
 
 @end
