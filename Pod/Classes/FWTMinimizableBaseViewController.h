@@ -10,6 +10,6 @@
 
 @interface FWTMinimizableBaseViewController : UIViewController
 
-- (void)presentModalController:(UIViewController*)controller withCompletionBlock:(void (^)(void))completionBlock;
+- (void)presentModalController:(UIViewController*)controller withButtonTitle:(NSString *)title withCompletionBlock:(void (^)(void))completionBlock;
 
 @end
